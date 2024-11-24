@@ -1,0 +1,25 @@
+import matplotlib.pyplot as plt
+
+
+def make_graph(data, title):
+    """
+    Function to create a plot for stock data.
+    
+    Parameters:
+    - data: pandas DataFrame containing the stock data.
+    - title: Title of the graph.
+    """
+    plt.figure(figsize=(10, 6))
+    plt.plot(data["Date"], data["Close"], label="Close Price", color="blue")
+    plt.title(title)
+    plt.xlabel("Date")
+    plt.ylabel("Close Price USD ($)")
+    plt.grid()
+    plt.legend()
+    plt.show()
+
+
+tesla_data_filtered = tesla_data[tesla_data["Date"] <= "2021-06-30"]
+
+
+make_graph(tesla_data_filtered, "Tesla Stock Price (Up to June 2021)")-
