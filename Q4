@@ -1,0 +1,27 @@
+import requests
+from bs4 import BeautifulSoup
+import pandas as pd
+
+
+url = "https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMDeveloperSkillsNetwork-PY0220EN-SkillsNetwork/labs/project/stock.html"
+response = requests.get(url)
+html_data_2 = response.text 
+
+
+soup = BeautifulSoup(html_data_2, "html.parser")
+
+
+tables = soup.find_all("table") 
+gme_revenue_table = tables[1]
+
+
+gme_revenue = pd.read_html(str(gme_revenue_table))[0]
+
+
+gme_revenue.columns = ["Date", "Revenue"]
+
+
+gme_revenue = gme_revenue[gme_revenue["Revenue"] != ""]
+
+
+gme_revenue.tail()
